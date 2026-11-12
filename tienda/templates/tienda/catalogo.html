@@ -4,6 +4,17 @@
 
 {% block contenido %}
 <h1>Catálogo</h1>
+<form method="get">
+    <input type="text" name="q" value="{{ q }}" placeholder="Buscar por nombre">
+    <select name="categoria">
+        <option value="">Todas las categorías</option>
+        {% for c in categorias %}
+        <option value="{{ c.id }}" {% if c.id == categoria_id %}selected{% endif %}>{{ c.nombre }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Buscar</button>
+</form>
+
 <div class="grid">
     {% for juego in juegos %}
     <div class="card">
