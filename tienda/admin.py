@@ -1,5 +1,15 @@
 from django.contrib import admin
 from .models import Categoria, Juego
+from .utils import formato_clp
 
 admin.site.register(Categoria)
-admin.site.register(Juego)
+
+@admin.register(Juego)
+class JuegoAdmin(admin.ModelAdmin):
+    list_display = ("nombre", "categoria", "disponible", "stock", "precio_en_pesos")
+    list_filter = ("categoria", "disponible")
+    search_fields = ("nombre",)
+
+    @admin.display(description="Precio", ordering="precio")
+    def precio_en_pesos(self, obj):
+        return formato_clp(obj.precio)

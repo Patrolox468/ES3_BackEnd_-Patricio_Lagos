@@ -1,4 +1,4 @@
-from typing import Any
+from .utils import formato_clp
 from django.db import models
 
 class Categoria(models.Model):
@@ -18,6 +18,9 @@ class Juego(models.Model):
     edad_minima= models.PositiveSmallIntegerField()
     stock = models.PositiveIntegerField(default=0)
     disponible = models.BooleanField(default=True)
+    @property
+    def precio_clp(self):
+        return formato_clp(self.precio)
 
     def __str__(self):
         return self.nombre
