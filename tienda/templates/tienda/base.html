@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}Tienda de juegos de mesa{% endblock %}</title>
+    <style>
+        body { font-family: sans-serif; margin: 0; }
+        nav { background: #222; padding: 12px 20px; }
+        nav a { color: white; margin-right: 16px; text-decoration: none; }
+        main { padding: 20px; }
+        .grid { display: flex; flex-wrap: wrap; gap: 20px; }
+        .card { border: 1px solid #ccc; padding: 12px; width: 220px; }
+        .card img { width: 100%; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'catalogo' %}">Inicio</a>
+        <a href="/admin/">Administración</a>
+    </nav>
+    <main>
+        {% block contenido %}{% endblock %}
+    </main>
+</body>
+</html>

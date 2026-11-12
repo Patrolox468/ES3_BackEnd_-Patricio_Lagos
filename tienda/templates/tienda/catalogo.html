@@ -1,0 +1,19 @@
+{% extends "tienda/base.html" %}
+
+{% block titulo %}Catálogo{% endblock %}
+
+{% block contenido %}
+<h1>Catálogo</h1>
+<div class="grid">
+    {% for juego in juegos %}
+    <div class="card">
+        <img src="{{ juego.imagen.url }}" alt="{{ juego.nombre }}">
+        <h3>{{ juego.nombre }}</h3>
+        <p>{{ juego.categoria }}</p>
+        <p>{{ juego.precio_clp }}</p>
+    </div>
+    {% empty %}
+    <p>No hay juegos disponibles.</p>
+    {% endfor %}
+</div>
+{% endblock %}
