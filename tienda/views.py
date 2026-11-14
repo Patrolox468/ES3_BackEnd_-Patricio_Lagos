@@ -1,11 +1,20 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from .forms import PedidoForm
 from .models import Categoria, Juego
 
 
 def detalle(request, juego_id):
     juego = get_object_or_404(Juego, id=juego_id, disponible=True)
-    return render(request, "tienda/detalle.html", {"juego": juego})
-
+    if request.method == "POST":
+        form = PedidoForm(request.POST)
+        if form.is_valid():
+            pedido = form.save(commit=False)
+            pedido.juego = juego
+            pedido.save()
+            return redirect("detalle", juego_id=juego.id)
+    else:
+        form = PedidoForm()
+    return render(request, "tienda/detalle.html", {"juego": juego, "form": form})
 
 def catalogo(request):
     juegos = Juego.objects.filter(disponible=True).select_related("categoria")

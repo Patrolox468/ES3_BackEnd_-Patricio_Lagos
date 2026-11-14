@@ -1,0 +1,21 @@
+{% extends "tienda/base.html" %}
+
+{% block titulo %}{{ juego.nombre }}{% endblock %}
+
+{% block contenido %}
+<a href="{% url 'catalogo' %}">← Volver al catálogo</a>
+<h1>{{ juego.nombre }}</h1>
+<img src="{{ juego.imagen.url }}" alt="{{ juego.nombre }}" width="300">
+<p><strong>Categoría:</strong> {{ juego.categoria }}</p>
+<p><strong>Precio:</strong> {{ juego.precio_clp }}</p>
+<p><strong>Jugadores:</strong> {{ juego.jugadores }}</p>
+<p><strong>Edad mínima:</strong> {{ juego.edad_minima }} años</p>
+<p><strong>Stock:</strong> {{ juego.stock }} unidades</p>
+<p>{{ juego.descripcion }}</p>
+<h2>Hacer pedido</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Pedir</button>
+</form>
+{% endblock %}
