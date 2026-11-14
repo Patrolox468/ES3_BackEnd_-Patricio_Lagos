@@ -1,5 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Categoria, Juego
+
+
+def detalle(request, juego_id):
+    juego = get_object_or_404(Juego, id=juego_id, disponible=True)
+    return render(request, "tienda/detalle.html", {"juego": juego})
 
 
 def catalogo(request):

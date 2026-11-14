@@ -19,7 +19,7 @@
     {% for juego in juegos %}
     <div class="card">
         <img src="{{ juego.imagen.url }}" alt="{{ juego.nombre }}">
-        <h3>{{ juego.nombre }}</h3>
+        <h3><a href="{% url 'detalle' juego.id %}">{{ juego.nombre }}</a></h3>
         <p>{{ juego.categoria }}</p>
         <p>{{ juego.precio_clp }}</p>
     </div>
