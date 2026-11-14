@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .form import PedidoForm
+from .forms import PedidoForm
 from .models import Categoria, Juego, Pedido
 
 

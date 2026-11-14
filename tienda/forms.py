@@ -3,7 +3,6 @@ from .models import Pedido
 
 
 class PedidoForm(forms.ModelForm):
-   class PedidoForm(forms.ModelForm):
     cantidad = forms.IntegerField(min_value=1, max_value=5)
 
     class Meta:
@@ -21,7 +20,3 @@ class PedidoForm(forms.ModelForm):
                 f"Solo hay {self.juego.stock} unidades disponibles."
             )
         return cantidad
-
-    class Meta:
-        model = Pedido
-        fields = ["nombre", "correo", "telefono", "cantidad"]
