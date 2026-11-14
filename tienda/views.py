@@ -5,15 +5,17 @@ from .models import Categoria, Juego
 
 def detalle(request, juego_id):
     juego = get_object_or_404(Juego, id=juego_id, disponible=True)
-    if request.method == "POST":
-        form = PedidoForm(request.POST)
+    if request.method == "POST" and juego.stock > 0:
+        form = PedidoForm(request.POST, juego=juego)
         if form.is_valid():
             pedido = form.save(commit=False)
             pedido.juego = juego
             pedido.save()
+            juego.stock -= pedido.cantidad
+            juego.save()
             return redirect("detalle", juego_id=juego.id)
     else:
-        form = PedidoForm()
+        form = PedidoForm(juego=juego)
     return render(request, "tienda/detalle.html", {"juego": juego, "form": form})
 
 def catalogo(request):

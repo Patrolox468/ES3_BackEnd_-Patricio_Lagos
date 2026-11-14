@@ -12,10 +12,14 @@
 <p><strong>Edad mínima:</strong> {{ juego.edad_minima }} años</p>
 <p><strong>Stock:</strong> {{ juego.stock }} unidades</p>
 <p>{{ juego.descripcion }}</p>
-<h2>Hacer pedido</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Pedir</button>
-</form>
+    {% if juego.stock == 0 %}
+    <p><strong>Agotado</strong></p>
+{% else %}
+    <h2>Hacer pedido</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Pedir</button>
+    </form>
+{% endif %}
 {% endblock %}

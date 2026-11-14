@@ -22,6 +22,7 @@
         <h3><a href="{% url 'detalle' juego.id %}">{{ juego.nombre }}</a></h3>
         <p>{{ juego.categoria }}</p>
         <p>{{ juego.precio_clp }}</p>
+        {% if juego.stock == 0 %}<p><strong>Agotado</strong></p>{% endif %}
     </div>
     {% empty %}
     <p>No hay juegos disponibles.</p>
