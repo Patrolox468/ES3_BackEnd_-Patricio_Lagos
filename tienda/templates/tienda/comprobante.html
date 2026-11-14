@@ -1,0 +1,14 @@
+{% extends "tienda/base.html" %}
+
+{% block titulo %}Comprobante{% endblock %}
+
+{% block contenido %}
+<h1>Comprobante de pedido</h1>
+<p><strong>Código:</strong> {{ pedido.codigo }}</p>
+<p><strong>Juego:</strong> {{ pedido.juego.nombre }}</p>
+<p><strong>Nombre:</strong> {{ pedido.nombre }}</p>
+<p><strong>Cantidad:</strong> {{ pedido.cantidad }}</p>
+<p><strong>Total:</strong> {{ pedido.total_clp }}</p>
+<p><strong>Fecha:</strong> {{ pedido.fecha|date:"d/m/Y H:i" }}</p>
+<a href="{% url 'catalogo' %}">Volver al catálogo</a>
+{% endblock %}

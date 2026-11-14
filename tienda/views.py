@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import PedidoForm
-from .models import Categoria, Juego
+from .form import PedidoForm
+from .models import Categoria, Juego, Pedido
 
 
 def detalle(request, juego_id):
@@ -13,7 +13,7 @@ def detalle(request, juego_id):
             pedido.save()
             juego.stock -= pedido.cantidad
             juego.save()
-            return redirect("detalle", juego_id=juego.id)
+            return redirect("comprobante", codigo=pedido.codigo)
     else:
         form = PedidoForm(juego=juego)
     return render(request, "tienda/detalle.html", {"juego": juego, "form": form})
@@ -40,3 +40,7 @@ def catalogo(request):
         "categoria_id": categoria_id,
     }
     return render(request, "tienda/catalogo.html", contexto)
+
+def comprobante(request, codigo):
+    pedido = get_object_or_404(Pedido, codigo=codigo)
+    return render(request, "tienda/comprobante.html", {"pedido": pedido})
